@@ -27,7 +27,7 @@ func enableCors(w *http.ResponseWriter) {
 func index(w http.ResponseWriter, r *http.Request) {
 	enableCors(&w)
 	p := Person{
-		FirstName: "Fuck",
+		FirstName: "Ryan",
 		LastName:  "Brothers",
 		Email:     "test@test.com",
 		Password:  "JennaNen",

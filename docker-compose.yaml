@@ -1,0 +1,34 @@
+version: '3'
+services:
+  nginx:
+    restart: always
+    depends_on:
+      - "backend"
+      - "frontend"
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./nginx
+    ports:
+      - "3050:80"
+  frontend:
+    image: "ryebot33/govuefrontend"
+    restart: always
+    depends_on:
+      - "backend"
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./client
+    # ports:
+    #   - "8080:8080"
+    volumes:
+      - /app/node_modules
+      - ./client:/app
+  backend:
+    image: "ryebot33/govuebackend"
+    restart: always
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./server
+    volumes:
+      - ./server:/app
+

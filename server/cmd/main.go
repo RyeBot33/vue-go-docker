@@ -36,9 +36,18 @@ func index(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		error.Error(err)
 	}
+	fmt.Printf("%+v\n",p)
 	fmt.Fprintf(w, string(bs))
 }
 
 func write(w http.ResponseWriter, r *http.Request) {
-	fmt.Println(r)
+	//w.Header().Set("Content-Type", "application/json")
+	var data Person
+	err := json.NewDecoder(r.Body).Decode(&data)
+	if err != nil {
+		http.Error(w, err.Error(), 404)
+		return
+	}
+//	bs, _ := json.Marshal(data) //To Print JSON
+	fmt.Println(data.FirstName)
 }
